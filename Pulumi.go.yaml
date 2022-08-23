@@ -1,0 +1,4 @@
+config:
+  aws:profile: pulumi-ce
+  aws:region: us-west-2
+  self-hosted-ecr:imageTag: 20220822-924-signed
