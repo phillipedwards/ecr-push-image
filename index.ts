@@ -32,7 +32,8 @@ const constructRepoAndBuildImage = async (imageTag: string, name: string, repoNa
     });
 
     const tag = new local.Command(`${name}-pull-tag`, {
-        create: pulumi.interpolate `docker tag ${remoteImage.name} ${taggedImageName}`
+        create: pulumi.interpolate `docker tag ${remoteImage.name} ${taggedImageName}`,
+        triggers: ["create"]
     });
 
     const image = new materialDocker.Image(`${name}-image`, {
@@ -43,7 +44,7 @@ const constructRepoAndBuildImage = async (imageTag: string, name: string, repoNa
             name: "SOURCE_IMAGE",
             value: taggedImageName
         }]
-    }, { dependsOn: [tag] });
+    }, { dependsOn: [tag, remoteImage] });
 
     return {
         repo: repo.repositoryUrl,
