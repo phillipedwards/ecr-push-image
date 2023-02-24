@@ -1,4 +1,4 @@
 config:
   aws:profile: pulumi-ce
   aws:region: us-west-2
-  self-hosted-ecr:imageTag: 20210811-16113-signed
+  self-hosted-ecr:imageTag: latest
